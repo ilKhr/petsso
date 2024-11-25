@@ -1,0 +1,6 @@
+env: "local" # dev, prod, local
+storage_path: "file::memorydb%d:?mode=memory&cache=shared"
+token_ttl: 1h
+grpc:
+  port: 0
+  timeout: 100s

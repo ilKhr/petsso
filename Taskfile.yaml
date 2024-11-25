@@ -1,0 +1,28 @@
+# https://taskfile.dev/
+
+version: "3"
+
+tasks:
+  run:
+    desc: "Run application"
+    cmds:
+    - go run ./cmd/sso/main.go -config=./config/local.yaml
+  migrate-up:
+    aliases:
+      - mu
+    desc: "Up migrate to db"
+    cmds:
+    - go run ./cmd/migrator --storage-path=./storage/sso.db --migrations-path=./migrations
+  test-migrate-up:
+    aliases:
+      - tmu
+    desc: "Up test migrate to db"
+    cmds:
+    - go run ./cmd/migrator --storage-path=./storage/sso_test.db --migrations-path=./migrations
+    - go run ./cmd/migrator --storage-path=./storage/sso_test.db --migrations-path=./tests/migrations
+  run-tests:
+    aliases:
+      - rt
+    desc: "Run sso tests"
+    cmds:
+    - go test ./tests
